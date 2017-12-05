@@ -43,8 +43,9 @@ _set_req=function(){
         return;
     }
     var participant_where="";
-    var participant_uid=$vm.vm['__ID'].op.participant_uid;
-    if(participant_uid!==undefined){
+    var participant_uid="";
+	if($vm.vm['__ID'].op.input!=undefined) participant_uid=$vm.vm['__ID'].op.input.participant_uid;
+    if(participant_uid!=="" && participant_uid!==undefined){
         site_sql_where='';
         participant_where=" where uid="+participant_uid;
     }
@@ -56,17 +57,6 @@ _set_req=function(){
     sql_n+=" select count(ID) from [FORM-"+_db_pid+"-@S1] join participant on PUID=ParticipantUID";
 
     _req={cmd:'query_records',sql:sql,sql_n:sql_n,s1:'"'+$('#keyword__ID').val()+'"',I:$('#I__ID').text(),page_size:$('#page_size__ID').val()}
-}
-//-------------------------------------
-__set_req_export=function(){
-    _fields_e="Participant ID|ParticipantUID,Participant,"+_task_fields
-    var sql="with participant as (select Site=S1,ParticipantUID=UID,sql_participant="+sql_participant+",RowNum=row_number() over (order by ID DESC) from [FORM-"+participant_pid+"]"+site_sql_where+" )";
-    sql+=",task as (select ID,UID,PUID,S3,Information,DateTime,Author from [FORM-"+_db_pid+"-@S1])";
-    sql+=" select ID,ParticipantUID,Site,Information,Participant=sql_participant,DateTime,Author from participant left join task on PUID=ParticipantUID";
-    _set_from_to();
-    if(_from!='0' && _to!='0') sql+=" where RowNum between @I6 and @I7";
-    else sql+=" order by ParticipantUID DESC";
-    _req={cmd:'query_records',sql:sql,i6:_from,i7:_to}
 }
 //-------------------------------------
 _set_req_export=function(i1,i2){

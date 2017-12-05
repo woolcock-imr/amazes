@@ -1,4 +1,4 @@
-<section id=page__ID>
+<section id=panel__ID>
 	<div id=info__ID></div>
 	VmInclude:__CURRENT_PATH__/task_links.html
 </section>
@@ -8,11 +8,12 @@
 		//--------------------------------------------------------
 		var record;
 		$('#D__ID').on('load',function(){
-			record=$vm.vm['__ID'].op.record;
-			var info="Study ID:"+record.Study_ID;
+			record=$vm.vm['__ID'].op.input.record;
+			var info="AMAZES ID:"+record.AMAZES_ID;
 			$('#info__ID').text(info);
 		})
 		//--------------------------------------------------------
+		/*
 		var prefix=$vm.module_list[$vm.vm['__ID'].name].prefix; if(prefix==undefined) prefix="";
 		//-------------------------------------
 		$('#page__ID li').on('click',function(){
@@ -23,6 +24,24 @@
 					return;
 				}
 				$vm.load_module_by_name(prefix+m,$vm.root_layout_content_slot,{participant_uid:record.UID,participant_name:record.Study_ID})
+			}
+		})
+		*/
+		//--------------------------------------------------------
+		var prefix=$vm.vm["__ID"].name+"_";
+		$('#panel__ID li').on('click',function(){
+			if( $(this).hasClass( 'not_allowed__ID' )===true){
+				  alert("No permission!");
+				  return;
+			}
+			var m=$(this).attr('module');
+			if(m!=undefined){
+				if($vm.module_list[prefix+m]==undefined){
+					alert(prefix+m +" is not in the module list.");
+					return;
+				}
+				$vm.module_list[prefix+m].alert='1';
+				$vm.nav_load_module(prefix+m,"",{participant_uid:record.UID});
 			}
 		})
 		//--------------------------------------------------------

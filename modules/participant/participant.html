@@ -9,7 +9,7 @@
         //-------------------------------------
         VmInclude:__COMPONENT__/grid/grid.v3.js
         //-------------------------------------
-		var prefix=_mlist[$vm.vm['__ID'].name].prefix;
+		//var prefix=_mlist[$vm.vm['__ID'].name].prefix;
 		//-------------------------------------
         $('#D__ID').on('load',function(){  _set_req(); _request_data();  })
         $('#D__ID').on('show',function(){  _set_req(); _request_data();  })
@@ -24,9 +24,7 @@
                     if(_records[I].UID===undefined) return;
                     td.html("<u style='cursor:pointer'>Data Entry</u>");
                     td.find('u').on('click',function(){
-                        $vm.load_module_by_name(prefix+'child_panel',$vm.root_layout_content_slot,{
-							record:records[I]
-                        });
+                        $vm.nav_load_module('panel_child',$vm.root_layout_content_slot,{record:records[I]});
                     });
                     break;
             }

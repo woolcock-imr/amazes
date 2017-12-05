@@ -1,0 +1,8 @@
+{
+	"modules":
+	{
+		"home":	          						{"url":"/modules/home.html", "name_for_search":"Home page"},
+		"participant":                 			{"table_id":"20010372",      "url":"/modules/participant/participant.html"},
+		"clinical_trials_notes":   				{"table_id":"20010373",      "url":"/modules/participant/task-notes.html"}
+	}
+}

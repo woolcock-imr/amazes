@@ -18,6 +18,10 @@
 		  //--------------------------------------------------------
 		  var prefix=$vm.vm["__ID"].name+"_";
 		  $('#panel__ID li').on('click',function(){
+			  if( $(this).hasClass( 'not_allowed__ID' )===true){
+		            alert("No permission!");
+		            return;
+		      }
 			  var m=$(this).attr('module');
               if(m!=undefined){
 				  if($vm.module_list[prefix+m]==undefined){
@@ -29,8 +33,34 @@
               }
 		  })
 		  //--------------------------------------------------------
-		  //Vm Include:__CURRENT_PATH__/check-link.js
-		  //--------------------------------------------------------
+		  $('#D__ID').on('load',function(){
+		      var pids="";
+		      if($vm.server==='production'){
+		          $('.nav__ID li').each(function(index){
+		              var name=$(this).attr('module');
+		              var pid=undefined; if($vm.module_list[prefix+name]!==undefined)  pid=$vm.module_list[prefix+name]['table_id'];
+		              if(pid!==undefined && pid!=='--------'){
+		                 if(pids!=="") pids+=",";
+		                 pids+=pid;
+		              }
+		          });
+		          if(pids!==""){
+		              $VmAPI.request({data:{cmd:'permissions',pids:pids},callback:function(res){
+		                  $('.nav__ID li').each(function(index){
+		                      var name=$(this).attr('module');
+							  var pid=undefined; if($vm.module_list[prefix+name]!==undefined)  pid=$vm.module_list[prefix+name]['table_id'];
+		                      if(pid!==undefined && pid!=='--------'){
+		                          $(this).removeClass('not_allowed__ID');
+		                          if(res[pid]===undefined){
+		                              $(this).addClass('not_allowed__ID')
+		                          }
+		                      }
+		                  })
+		              }})
+		          }
+		      }
+		  })
+		  //---------------------------------------------------------------
       }
 </script>
 

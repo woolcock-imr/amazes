@@ -1,10 +1,6 @@
 {
 	"modules":
 	{
-		"home":	          						{"url":"/modules/home.html", "name_for_search":"Home page"},
-		"participant":                 			{"table_id":"20010372",      "url":"/modules/participant/participant.html"},
-		"clinical_trials_notes":   				{"table_id":"20010373",       "url":"/modules/participant/task-notes.html"},
-
 		"Adverse_Event":       							{"table_id":"20009731","url":"/modules/task/Adverse_Event.html","notes":" Adverse Event"},
 		"Concom_and_AE_Adverse_Event":          		{"table_id":"20009931","url":"/modules/task/Adverse_Event.html","notes":"Concom and AE Adverse Event"},
 		"Concom_and_AE_Serious_Adverse_Event":          {"table_id":"20009932","url":"/modules/task/Serious_Adverse_Event.html","notes":"Concom and AE Serious Adverse Event"},

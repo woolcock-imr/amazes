@@ -2,7 +2,7 @@
 var prefix=$vm.module_list[$vm.vm['__ID'].name].prefix; if(prefix==undefined) prefix="";
 //-------------------------------------
 var participant_pid=_mlist[prefix+'participant'].table_id;
-var notes_pid=_mlist[prefix+'clinical_trials_notes'].table_id;
+var notes_pid=_mlist[prefix+'edc-notes'].table_id;
 //var site_filter_pid=_mlist[prefix+'site_filter'].table_id;
 var sql_participant="@('AMAZES_ID')";
 //-------------------------------------
